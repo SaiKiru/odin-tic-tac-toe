@@ -92,13 +92,20 @@ const GUIController = (() => {
   };
 })();
 
-const PlayerFactory = (mark) => {
+const PlayerFactory = (mark, name) => {
+  let _name = name || `Player ${mark}`;
+
   function getMark() {
     return mark;
   }
 
+  function getName() {
+    return _name;
+  }
+
   return {
-    getMark
+    getMark,
+    getName
   };
 };
 
