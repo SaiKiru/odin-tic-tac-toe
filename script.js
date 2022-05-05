@@ -92,6 +92,16 @@ const GUIController = (() => {
   };
 })();
 
+const PlayerFactory = (mark) => {
+  function getMark() {
+    return mark;
+  }
+
+  return {
+    getMark
+  };
+};
+
 for (let i = 0; i < 9; i++) {
   let square = document.querySelector(`#gameboard-square${i}`);
   square.addEventListener('click', () => Game.play(i));
