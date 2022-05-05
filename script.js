@@ -1,3 +1,8 @@
+const Marks = {
+  X: 'X',
+  O: 'O'
+};
+
 const GameBoard = (() => {
   let _board = Array(9).fill('');
 
@@ -108,6 +113,35 @@ const PlayerFactory = (mark, name) => {
     getName
   };
 };
+
+const Game = (() => {
+  const _player1 = PlayerFactory(Marks.X);
+  const _player2 = PlayerFactory(Marks.O);
+  let _currentPlayer = _player1;
+  let _round = 1;
+
+  function play(idx) {
+    if (GameBoard.hasWinner()) return;
+
+    GameBoard.markSquare(_currentPlayer.getMark(), idx);
+    GUIController.updateDisplay(GameBoard.getBoardState());
+
+    if (GameBoard.hasWinner()) {
+      console.log(`${_currentPlayer.getName()} won the game!`);
+    }
+
+    if (_round === 9 && !GameBoard.hasWinner()) {
+      console.log('It\'s a draw!');
+    }
+
+    _round++;
+    _currentPlayer = _currentPlayer === _player1 ? _player2 : _player1;
+  };
+
+  return {
+    play
+  };
+})();
 
 for (let i = 0; i < 9; i++) {
   let square = document.querySelector(`#gameboard-square${i}`);
