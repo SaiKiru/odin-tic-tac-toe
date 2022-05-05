@@ -66,3 +66,33 @@ const GameBoard = (() => {
     hasWinner
   };
 })();
+
+const GUIController = (() => {
+  /**
+   * Selects a specific square on the board
+   * @param {number} idx - the index of the square
+   * @returns {Element} the square `Element`
+   */
+  function _selectSquare(idx) {
+    return document.querySelector(`#gameboard-square${idx}`);
+  }
+
+  /**
+   * Updates the board display.
+   * @param {Array<number>} boardState - the current state of the board
+   */
+  function updateDisplay(boardState) {
+    for (let i = 0; i < 9; i++) {
+      _selectSquare(i).textContent = boardState[i];
+    }
+  }
+
+  return {
+    updateDisplay
+  };
+})();
+
+for (let i = 0; i < 9; i++) {
+  let square = document.querySelector(`#gameboard-square${i}`);
+  square.addEventListener('click', () => Game.play(i));
+}
