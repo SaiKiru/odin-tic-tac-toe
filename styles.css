@@ -1,5 +1,6 @@
 :root {
     --square-gaps: 6px;
+    --gameboard-width: min(480px, 100%);
 }
 
 #gameboard {
@@ -8,7 +9,7 @@
     gap: var(--square-gaps);
     padding: 12px;
     margin-inline: auto;
-    width: min(480px, 100%);
+    width: var(--gameboard-width);
     aspect-ratio: 1 / 1;
 
     border-radius: 4px;
@@ -31,4 +32,18 @@
     background-color: white;
 
     user-select: none;
+}
+
+#game-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 32px auto;
+    width: var(--gameboard-width);
+}
+
+#game-control-new-game {
+    padding: 0.8rem 1rem;
+    text-transform: uppercase;
+    font-size: 1.2rem;
 }

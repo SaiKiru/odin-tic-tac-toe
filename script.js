@@ -138,8 +138,17 @@ const Game = (() => {
     _currentPlayer = _currentPlayer === _player1 ? _player2 : _player1;
   };
 
+  function newGame() {
+    GameBoard.clearBoard();
+    GUIController.updateDisplay(GameBoard.getBoardState());
+    GUIController.clearMessage();
+    _round = 1;
+    _currentPlayer = _player1;
+  }
+
   return {
-    play
+    play,
+    newGame
   };
 })();
 
@@ -147,3 +156,7 @@ for (let i = 0; i < 9; i++) {
   let square = document.querySelector(`#gameboard-square${i}`);
   square.addEventListener('click', () => Game.play(i));
 }
+
+document.querySelector('#game-control-new-game').addEventListener(
+  'click', () => Game.newGame()
+);
