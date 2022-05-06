@@ -92,8 +92,18 @@ const GUIController = (() => {
     }
   }
 
+  function showMessage(message) {
+    document.querySelector('#game-conclusion-message').textContent = message;
+  }
+
+  function clearMessage() {
+    document.querySelector('#game-conclusion-message').textContent = '';
+  }
+
   return {
-    updateDisplay
+    updateDisplay,
+    showMessage,
+    clearMessage
   };
 })();
 
@@ -127,11 +137,13 @@ const Game = (() => {
     GUIController.updateDisplay(GameBoard.getBoardState());
 
     if (GameBoard.hasWinner()) {
-      console.log(`${_currentPlayer.getName()} won the game!`);
+      const message = `${_currentPlayer.getName()} won the game!`;
+      GUIController.showMessage(message);
     }
 
     if (_round === 9 && !GameBoard.hasWinner()) {
-      console.log('It\'s a draw!');
+      const message = "It's a draw!";
+      GUIController.showMessage(message);
     }
 
     _round++;
