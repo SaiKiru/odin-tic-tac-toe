@@ -94,10 +94,17 @@ const GUIController = (() => {
     }
   }
 
+  /**
+   * Shows a message to the player.
+   * @param {string} message The message to be shown.
+   */
   function showMessage(message) {
     document.querySelector('#game-conclusion-message').textContent = message;
   }
 
+  /**
+   * Clears the message shown to the player.
+   */
   function clearMessage() {
     document.querySelector('#game-conclusion-message').textContent = '';
   }
@@ -112,10 +119,16 @@ const GUIController = (() => {
 const PlayerFactory = (mark, name) => {
   let _name = name || `Player ${mark}`;
 
+  /**
+   * @returns {string} The mark used by the player
+   */
   function getMark() {
     return mark;
   }
 
+  /**
+   * @returns {string} The name of the player
+   */
   function getName() {
     return _name;
   }
@@ -132,6 +145,10 @@ const Game = (() => {
   let _currentPlayer = _player1;
   let _round = 1;
 
+  /**
+   * Plays a single move.
+   * @param {number} idx The index of the square that triggered the move
+   */
   function play(idx) {
     if (GameBoard.hasWinner()) return;
 
@@ -154,6 +171,9 @@ const Game = (() => {
     _currentPlayer = _currentPlayer === _player1 ? _player2 : _player1;
   };
 
+  /**
+   * Starts a new game and clears the board.
+   */
   function newGame() {
     GameBoard.clearBoard();
     GUIController.updateDisplay(GameBoard.getBoardState());
