@@ -10,11 +10,13 @@ const GameBoard = (() => {
    * Marks a square on the game board.
    * @param {string} mark - The mark to be made
    * @param {number} idx - The index of the square
+   * @returns {boolean} Whether the square was marked successfully or not.
    */
   function markSquare(mark, idx) {
     if (_board[idx] !== '') return;
 
     _board[idx] = mark;
+    return true;
   }
 
   /**
@@ -133,7 +135,9 @@ const Game = (() => {
   function play(idx) {
     if (GameBoard.hasWinner()) return;
 
-    GameBoard.markSquare(_currentPlayer.getMark(), idx);
+    let markSuccessful = GameBoard.markSquare(_currentPlayer.getMark(), idx);
+    if (!markSuccessful) return;
+
     GUIController.updateDisplay(GameBoard.getBoardState());
 
     if (GameBoard.hasWinner()) {
